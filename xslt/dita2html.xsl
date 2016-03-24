@@ -16,14 +16,14 @@
               omit-xml-declaration="yes"/>
 
   <xsl:param name="commit"/>
-  <xsl:param name="LAYOUT" select="'base'" as="xs:string"/>
+  <xsl:param name="layout" select="'base'" as="xs:string"/>
 
   <xsl:template match="/">
     <xsl:apply-templates select="*" mode="jekyll-front-matter"/>
     <xsl:apply-templates select="*" mode="chapterBody"/>
   </xsl:template>
 
-  <xsl:template match="node()" mode="jekyll-front-matter">
+  <xsl:template match="*" mode="jekyll-front-matter">
     <xsl:text>---&#xA;</xsl:text>
     <xsl:text># Generated from DITA source&#xA;</xsl:text>
     <xsl:text>layout: </xsl:text>
@@ -44,7 +44,7 @@
   </xsl:template>
 
   <xsl:template match="node()" mode="jekyll-layout" as="xs:string">
-	  <xsl:value-of select="$LAYOUT"/>
+    <xsl:value-of select="$layout"/>
   </xsl:template>
 
   <xsl:template match="*" mode="chapterBody">
@@ -76,5 +76,6 @@
   <xsl:attribute-set name="nav.ul">
     <xsl:attribute name="class">nav nav-list</xsl:attribute>
   </xsl:attribute-set>
+
 
 </xsl:stylesheet>
